@@ -1,0 +1,10 @@
+{
+  "name": "Remix VajraGrid 3",
+  "description": "AI-Powered Disaster Response and Relief Coordination System. Features proactive monitoring, AI incident analysis, and relief coordination.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

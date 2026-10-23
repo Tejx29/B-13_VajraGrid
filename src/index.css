@@ -1,0 +1,404 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+
+@theme {
+  --font-sans: 'NotionInter', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --color-on-secondary: #ffffff;
+  --color-surface-tint: #2559bd;
+  --color-on-primary-fixed-variant: #00419e;
+  --color-secondary-fixed: #ffdcc3;
+  --color-surface-variant: #dde3ee;
+  --color-primary-fixed-dim: #b1c5ff;
+  --color-surface-container-highest: #dde3ee;
+  --color-on-secondary-fixed-variant: #6e3900;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #9f0012;
+  --color-tertiary: #74000a;
+  --color-primary: #00327d;
+  --color-on-surface: #161c24;
+  --color-error-container: #ffdad6;
+  --color-on-tertiary-fixed-variant: #930010;
+  --color-on-primary-container: #a5bdff;
+  --color-surface-bright: #f8f9ff;
+  --color-surface-container-low: #eef4ff;
+  --color-on-primary: #ffffff;
+  --color-error: #ba1a1a;
+  --color-on-surface-variant: #434653;
+  --color-inverse-primary: #b1c5ff;
+  --color-on-tertiary-fixed: #410003;
+  --color-tertiary-fixed-dim: #ffb3ac;
+  --color-secondary: #904d00;
+  --color-outline: #737784;
+  --color-secondary-container: #fd8b00;
+  --color-on-primary-fixed: #001946;
+  --color-primary-fixed: #dae2ff;
+  --color-tertiary-fixed: #ffdad6;
+  --color-outline-variant: #c3c6d5;
+  --color-on-secondary-fixed: #2f1500;
+  --color-inverse-on-surface: #ecf1fc;
+  --color-on-error-container: #93000a;
+  --color-surface: #12110F;
+  --color-surface-bright: #191715;
+  --color-surface-dim: #0B0B0A;
+  --color-surface-container: #191715;
+  --color-surface-container-low: #12110F;
+  --color-surface-container-high: #27211B;
+  --color-surface-container-highest: #27211B;
+  --color-surface-container-lowest: #090909;
+  --color-on-surface: #F4F0EB;
+  --color-on-background: #F4F0EB;
+  --color-background: #090909;
+
+  --spacing-margin-desktop: 32px;
+  --spacing-margin-mobile: 16px;
+  --spacing-gutter: 16px;
+  --spacing-stack-sm: 8px;
+  --spacing-stack-md: 16px;
+  --spacing-stack-lg: 24px;
+  --spacing-unit: 4px;
+
+  --radius: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 0.75rem;
+}
+
+/* --- Notion Typography Design Tokens (design.md) --- */
+@utility font-display-1 {
+  font-family: var(--font-sans);
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -2.125px;
+  font-feature-settings: "lnum" 1, "locl" 1;
+}
+@utility font-display-2 {
+  font-family: var(--font-sans);
+  font-size: 54px;
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -1.875px;
+  font-feature-settings: "lnum" 1, "locl" 1;
+}
+@utility font-heading-1 {
+  font-family: var(--font-sans);
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  font-feature-settings: "lnum" 1, "locl" 1;
+}
+@utility font-heading-2 {
+  font-family: var(--font-sans);
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.23;
+  letter-spacing: -0.625px;
+  font-feature-settings: "lnum" 1, "locl" 1;
+}
+@utility font-heading-3 {
+  font-family: var(--font-sans);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.27;
+  letter-spacing: -0.25px;
+  font-feature-settings: "lnum" 1, "locl" 1;
+}
+@utility font-title {
+  font-family: var(--font-sans);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.125px;
+  font-feature-settings: "lnum" 1, "locl" 1;
+}
+@utility font-body-md {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  font-feature-settings: "lnum" 1, "locl" 1;
+}
+@utility font-body-sm {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.33;
+  letter-spacing: 0;
+  font-feature-settings: "lnum" 1, "locl" 1;
+}
+@utility font-button {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0;
+  font-feature-settings: "lnum" 1, "locl" 1;
+}
+@utility font-caption {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.43;
+  letter-spacing: 0;
+  font-feature-settings: "lnum" 1, "locl" 1;
+}
+@utility font-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.33;
+  letter-spacing: 0.125px;
+  font-feature-settings: "lnum" 1, "locl" 1;
+}
+
+/* Backward-compatible utility mappings aligned with Notion Inter specifications */
+@utility font-headline-sm {
+  font-family: var(--font-sans);
+}
+@utility font-headline-md {
+  font-family: var(--font-sans);
+}
+@utility font-headline-lg {
+  font-family: var(--font-sans);
+}
+@utility font-label-caps {
+  font-family: var(--font-sans);
+}
+@utility font-data-mono {
+  font-family: var(--font-mono);
+}
+
+@utility text-headline-sm {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+  letter-spacing: -0.125px;
+}
+@utility text-headline-md {
+  font-size: 26px;
+  line-height: 32px;
+  font-weight: 700;
+  letter-spacing: -0.625px;
+}
+@utility text-headline-lg {
+  font-size: 40px;
+  line-height: 44px;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+@utility text-body-lg {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+@utility text-body-md {
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+@utility text-body-sm {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+@utility text-label-caps {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.125px;
+  font-weight: 600;
+}
+@utility text-data-mono {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+}
+
+@utility px-margin-desktop {
+  padding-left: 32px;
+  padding-right: 32px;
+}
+@utility gap-stack-sm {
+  gap: 8px;
+}
+@utility gap-stack-md {
+  gap: 16px;
+}
+@utility gap-stack-lg {
+  gap: 24px;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+html { 
+  scroll-snap-type: y mandatory; 
+  scroll-padding-top: 64px; 
+  scroll-behavior: smooth; 
+  height: auto; 
+  overflow-y: visible; 
+  margin: 0; 
+}
+
+body { 
+  height: auto; 
+  overflow-y: visible; 
+  margin: 0; 
+}
+
+.scroll-section {
+  scroll-snap-align: start;
+}
+
+
+@layer base {
+  *, ::before, ::after {
+    box-sizing: border-box;
+  }
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-sans);
+    font-feature-settings: "lnum" 1, "locl" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    overscroll-behavior: none;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  button, input, optgroup, select, textarea {
+    font-family: inherit;
+    font-feature-settings: inherit;
+  }
+  main>:first-child{margin-top:0!important;}
+  main>:last-child{margin-bottom:0!important;}
+}
+
+header,aside{border-bottom:none!important;border-right:none!important;}
+
+@keyframes slideDown {
+  from { transform: translate(-50%, -20px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
+.animate-spin-slow {
+  animation: spin 3s linear infinite;
+}
+
+.map-bg {
+    background-image: url('https://lh3.googleusercontent.com/aida/AEtjO1XeIYencJA5nWg2K_9tVWd6jGaIOFgpjT-Ie7is5OMeXFcFDoHb9Q0i9ZinykxcmdgVtozYQyvYxTwxnn-0DvgNACpOzzLki1efEWKj08ni_n1YcD-He6pPE16dmMrLF4CgyZ1Di1tymsLFOhrxcjyODfI15ecsEBe5VbGiWZmARA1uiI0qX0TecpsG0YWLZ6KTwmza5_tQcUle2TKXoA4hyQFDey3AtBD_6PiB73ZXxYPakGFtZbG55Q4');
+    background-size: cover;
+    background-position: center;
+}
+
+.glass-panel {
+    background: rgba(18, 17, 15, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(56, 48, 42, 0.8);
+}
+
+/* Smoked Obsidian & Vivid Amber Theme Tokens */
+:root {
+  --bg-app: #090909;
+  --bg-sidebar: #0B0B0A;
+  --bg-panel: #12110F;
+  --bg-card: #191715;
+  --bg-hover: #27211B;
+  --border-subtle: #38302A;
+  --text-primary: #F4F0EB;
+  --text-secondary: #AAA29A;
+  --text-muted: #7C756E;
+  --color-amber: #F5A23A;
+  --color-orange: #F46B27;
+  --color-crimson: #E53946;
+  --color-crimson-deep: #851D2A;
+  --color-green: #16B58A;
+}
+
+/* Custom scrollbar for smoked obsidian theme */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  display: block;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2622;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #38302A;
+}
+
+/* Leaflet UI Overrides */
+.leaflet-container {
+  font-family: inherit;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 520px;
+  background-color: #080909 !important;
+}
+
+/* Fix Tailwind 4 preflight max-width on leaflet tiles */
+.leaflet-tile {
+  max-width: none !important;
+  max-height: none !important;
+  visibility: inherit !important;
+}
+
+.leaflet-tile-pane {
+  z-index: 200 !important;
+}
+
+.leaflet-overlay-pane {
+  z-index: 400 !important;
+}
+
+.leaflet-marker-pane {
+  z-index: 600 !important;
+}
+
+.leaflet-popup-pane {
+  z-index: 700 !important;
+}
+
+.leaflet-popup-content-wrapper {
+  padding: 0;
+  border-radius: 0.75rem;
+  background: #111111 !important;
+  color: #F5F1EC !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.7), 0 8px 10px -6px rgba(0, 0, 0, 0.6);
+  border: 1px solid #38302A !important;
+}
+
+.leaflet-popup-tip {
+  background: #111111 !important;
+}
+
+.leaflet-popup-content {
+  margin: 12px 14px;
+  line-height: 1.4;
+  color: #F5F1EC;
+}
+.resqai-incident-marker,
+.resqai-volunteer-marker,
+.resqai-resource-marker,
+.resqai-alert-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+
